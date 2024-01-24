@@ -71,6 +71,21 @@ Node* create_tree(char* pre, char* in, int pre_s, int in_s, int count) {
     return new_node;
 }
 
+bool from_the_root_to_the_top(Node* root, int key, std::vector<int>& array) {
+    if (root == nullptr) return false;
+
+    if (root->data == key) {
+        array.push_back(root->data);
+        return true;
+    }
+    if (from_the_root_to_the_top(root->left, key, array) || from_the_root_to_the_top(root->left, key, array)) {
+        array.push_back(root->data);
+        return true;
+    }
+
+    return false;
+}
+
 int main() {
     Node* D = new Node {'D'};
     Node* C = new Node {'C'};
@@ -104,6 +119,14 @@ int main() {
             std::cout << (char)i << " ";
         }
         std::cout << std::endl;
+    }
+
+    std::cout << "------" << std::endl;
+
+    std::vector<int> t {};
+    from_the_root_to_the_top(new_root, '1', t);
+    for (auto& item : t) {
+        std::cout << (char)item << std::endl;
     }
 
     return 0;
